@@ -1,0 +1,67 @@
+<% include partials/header %>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- left side -->
+        <div class="col md-2 col-lg-2 border-right">
+            <div class="container mt-3">
+                <img src="/images/defaultImage.jpg" class="d-inline-block w-25 rounded-circle" alt="">
+                <p class="d-inline-block">Janardan</p>
+            </div>
+
+            <div class="container mt-3">
+                <a href="#" class="custom-a">
+                    <i class="fas fa-newspaper d-inline-block"></i>
+                    <p class="d-inline-block">News Feeds</p>
+                </a>
+            </div>
+
+            <div class="container mt-3">
+                <a href="#" class="custom-a">
+                    <i class="fas fa-tv d-inline-block"></i>
+                    <p class="d-inline-block">Entertainment</p>
+                </a>
+            </div>
+            <div class="container mt-3">
+                <a href="#" class="custom-a">
+                    <i class="fab fa-youtube d-inline-block"></i>
+                    <p class="d-inline-block">YouTube</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- middel -->
+
+        <div class="container col-md-8 col-lg-8  custom-margin">
+            <div class="custom-middle">
+                <div class="d-inline-block custom-width ">
+                    <img src="/images/defaultImage.jpg" class="d-inline-block custom-width2 rounded-circle" alt="">
+                </div>
+                <form action="/welcome/dashboard" class="d-inline-block position-absolute w-75" method="POST">
+                    <p class="custom-p">Share Your Thought...</p>
+                    <div class="form-group">
+                        <div class="d-inline-block custom-textArea">
+                            <textarea class="form-control" id="exampleFormControlTextarea1 " rows="3"></textarea>
+                        </div>
+                        <input type="file" name="fileupload" accept="image/*" multiple>
+
+                        <button type="submit" class="btn btn-primary ml">Share</button>
+
+
+                    </div>
+                </form>
+            </div>
+
+            
+
+        </div>
+
+
+        <!-- right -->
+
+
+        <!-- end -->
+    </div>
+</div>
+
+<% include partials/fotter %>

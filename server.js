@@ -14,7 +14,6 @@ require("./passport/passport-facebook");
 require('./passport/passport-google');
 
 
-// const publicPath = path.join(__dirname, "/validation");
 //Router
 const router = require('./router/router');
 
@@ -24,14 +23,8 @@ mongoose.connect('mongodb://localhost/ChatApp');
 
 var app = express();
 
-app.use((req, res, next) => {
-    res.locals.userId = req.user;
-    next();
-});
-
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + '/public'));
-// app.use(express.static(publicPath));
 app.use(bodyParser.urlencoded({
     extended: true
 }));

@@ -6,7 +6,7 @@
         <div class="col md-2 col-lg-2 border-right">
             <div class="container mt-3">
                 <img src="/images/defaultImage.jpg" class="d-inline-block w-25 rounded-circle" alt="">
-                <p class="d-inline-block">Janardan</p>
+                <p class="d-inline-block"><%=user.firstName + " " +user.lastName %></p>
             </div>
 
             <div class="container mt-3">
@@ -33,26 +33,44 @@
         <!-- middel -->
 
         <div class="container col-md-8 col-lg-8  custom-margin">
-            <div class="custom-middle">
-                <div class="d-inline-block custom-width ">
-                    <img src="/images/defaultImage.jpg" class="d-inline-block custom-width2 rounded-circle" alt="">
-                </div>
-                <form action="/welcome/dashboard" class="d-inline-block position-absolute w-75" method="POST">
-                    <p class="custom-p">Share Your Thought...</p>
-                    <div class="form-group">
-                        <div class="d-inline-block custom-textArea">
-                            <textarea class="form-control" id="exampleFormControlTextarea1 " rows="3"></textarea>
-                        </div>
-                        <input type="file" name="fileupload" accept="image/*" multiple>
-
-                        <button type="submit" class="btn btn-primary ml">Share</button>
-
-
+            <div class="color">
+                <div class="custom-middle">
+                    <div class="d-inline-block custom-width ">
+                        <img src="/images/defaultImage.jpg" class="d-inline-block custom-width2 rounded-circle" alt="">
                     </div>
-                </form>
+                    <form action="/welcome/dashboard" class="d-inline-block position-absolute w-75" method="POST" enctype="multipart/form-data">
+                        <p class="custom-p">Share Your Thought...</p>
+                        <div class="form-group">
+                            <div class="d-inline-block custom-textArea">
+                                <textarea class="form-control" id="exampleFormControlTextarea1 " rows="3" name="postDescription"></textarea>
+                            </div>
+                            <input type="file" name="fileupload" accept="image/*">
+
+                            <button type="submit" class="btn btn-primary ml">Share</button>
+                        </div>
+                    </form>
+                </div>
             </div>
 
-            
+            <!-- data of post -->
+            <div class="container-fluid">
+                <% post.forEach((data)=>{ %>
+                <div class="thumbnail" style="margin-top:22px;">
+                <div class="card">
+                    <div style="padding:12px 0px 11px 23px;">
+                    <img src="<%= data.author.userProfilePic %>" class="d-inline-block rounded-circle" style="width:5%;" alt="">
+                    <h5 class="d-inline-block"><%= data.author.userName %></h5>
+                    </div>
+
+                        <img class="card-img-top" src="<%=data.userPost %>" alt="Card image cap">
+                        <div class="card-body">
+                          <p class="card-text"><%=data.description %></p>
+                        </div>
+                      </div>
+                <% }) %>
+
+            </div>
+
 
         </div>
 

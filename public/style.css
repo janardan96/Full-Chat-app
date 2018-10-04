@@ -79,7 +79,10 @@ body {
     margin-left: 20px;
     margin-top: 20px;
     padding-top: 10px;
+}
+.color{
     background-color: #fff;
+    padding: 15px 19px;
 }
 .custom-width{
     width:15%;
@@ -116,4 +119,9 @@ background-color: #6375d1;
     overflow: hidden;
     position: relative;
     height: 180px;
+}
+
+.card-img-top{
+  width:92%;
+ margin: 0 auto;
 }

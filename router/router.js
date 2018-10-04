@@ -1,8 +1,29 @@
 var router = require('express').Router();
 const passport = require('passport');
 const Post=require("../databaseModel/post");
+const multer=require("multer");
 
-router.get('/', (req, res) => {
+// for Storing the post imagees
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+    cb(null, 'public/uploads/')
+    },
+    filename: function(req, file, cb) {
+    cb(null, file.originalname);
+    }
+   });
+    
+   var upload = multer({
+    storage: storage
+   });
+
+
+//end
+
+router.get('/',(req, res) => {
+    if(req.isAuthenticated()){
+        return res.redirect('/welcome');
+    }
     res.render('login', {
         message: req.flash('LoginError')
     });
@@ -26,25 +47,40 @@ router.get('/register', (req, res) => {
 });
 
 router.get("/welcome/dashboard",IsLoggedIn,(req, res) => {
-    res.render("dashboard");
+    Post.find({},(err,found)=>{
+        if(err){
+            console.log(err);
+            res.render("dashboard");
+        }
+        else{
+            // console.log(found);
+            // console.log(req.user);
+            res.render("dashboard",{post:found ,user:req.user});
+        }
+    })
 })
 
-router.post('/welcome/dashboard',(req,res)=>{
+router.post('/welcome/dashboard',IsLoggedIn,upload.single('fileupload'),(req,res)=>{
     Post.create({
-        description:"Heeee",
-        image:"https://3.bp.blogspot.com/-FYjlw5lYV_Q/VCaXoNp-PTI/AAAAAAAAHmk/cLuCv4Ruq_U/s1600/37.jpg"
+        description:req.body.postDescription,
+        userPost:req.file.path
+        // image:"https://3.bp.blogspot.com/-FYjlw5lYV_Q/VCaXoNp-PTI/AAAAAAAAHmk/cLuCv4Ruq_U/s1600/37.jpg"
     },(err,post)=>{
         if(err){
             console.log("Some error");
         }
         else{
+            console.log(req.file.path);
+            post.author.id=req.user._id;
+            post.author.userName=req.user.firstName + " " +req.user.lastName;
+            post.author.userProfilePic=req.user.userImage;
             post.save((err,data)=>{
-                if(err){
+                if(err){ 
                     console.log("Not saving");
                 }
                 else{
-                    console.log(data);
-                    res.redirect('/welcome/dashboard',{userId: req.user});
+                    // console.log(data);
+                    res.redirect('/welcome/dashboard');
 
                 }
             })
@@ -131,6 +167,7 @@ router.get("/logout", (req, res) => {
 //middleware
 function IsLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
+        res.locals.userId = req.user;
         return next();
     }
     res.redirect("/");

@@ -3,10 +3,6 @@ const bcrypt = require('bcrypt');
 // const Post=require('./post')
 
 const userSchema = mongoose.Schema({
-    post:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Post"
-    }],
     firstName: {
         type: String,
         required: true

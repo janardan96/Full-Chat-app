@@ -59,14 +59,13 @@
                 <div class="card">
                     <div style="padding:12px 0px 11px 23px;">
 
-                        <%  var ImageStore=[]; %>
                           <%  function ss(){ %>
-                           <% var strA="public/uploads/wonder-woman-g2-1500x1000.jpg"; %>
-                            <% var pathArray = strA.split( "/" ); %>
-                           <% for(i=1; i<=pathArray.length; i++){ %>
-                            <% ImageStore.push(pathArray[i]); %>
-                           %< } %>
-                           <% var joining="/"+ImageStore.join("/")  %>
+                           <% var strA=data.userPost; %>
+                            <% var pathArray = strA.split( "public\\" ); %>
+                           <% var joining="/"+pathArray[1] %>
+                           <% console.log(pathArray) %>
+
+                           <% console.log(joining) %>
                            <% return joining; %>
                            <% } %>
 
@@ -74,7 +73,7 @@
                     <h5 class="d-inline-block"><%= data.author.userName %></h5>
                     </div>
 
-                        <img class="card-img-top" src="<%=data.userPost %>" alt="Card image cap">
+                        <img class="card-img-top" src="<%=ss() %>" alt="Card image cap">
                         <div class="card-body">
                           <p class="card-text"><%=data.description %></p>
                         </div>

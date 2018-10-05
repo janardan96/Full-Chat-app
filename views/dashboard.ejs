@@ -58,6 +58,18 @@
                 <div class="thumbnail" style="margin-top:22px;">
                 <div class="card">
                     <div style="padding:12px 0px 11px 23px;">
+
+                        <%  var ImageStore=[]; %>
+                          <%  function ss(){ %>
+                           <% var strA="public/uploads/wonder-woman-g2-1500x1000.jpg"; %>
+                            <% var pathArray = strA.split( "/" ); %>
+                           <% for(i=1; i<=pathArray.length; i++){ %>
+                            <% ImageStore.push(pathArray[i]); %>
+                           %< } %>
+                           <% var joining="/"+ImageStore.join("/")  %>
+                           <% return joining; %>
+                           <% } %>
+
                     <img src="<%= data.author.userProfilePic %>" class="d-inline-block rounded-circle" style="width:5%;" alt="">
                     <h5 class="d-inline-block"><%= data.author.userName %></h5>
                     </div>
